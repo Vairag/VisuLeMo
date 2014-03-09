@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | New User"/>
+        </ui:include>
+	
+     </h:head>
+
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>   
+     <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="Login"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+        <article class="span4">
+             <h3>Create a new User :</h3>
+              <div class="inner-1">          
+                   <h:form id="newlearner">
+                    <h:panelGrid > 
+                       <h:outputText  value="Full Name*:" title="It will also be used as default Name in PALM"/>  <p:inputText  id="lname" required="true"/> 
+                        <h:outputText value="Login Id*:" />  <p:inputText  id="luid" required="true"/> 
+                        <h:outputText value="New Password*: " /> <p:password id="lpwd" required="true"/> 
+                        <h:outputText value="Email*:" />  <p:inputText  id="lemail" type="email" required="true"/>  
+                        <h:outputText value="University:" />  <p:inputText  id="luni" /> 
+                        <h:outputText value="Designation:" />  <p:inputText  id="ldesign" /> 
+                        <h:commandButton class="btn btn-1" action="#{learner.newLearner()}" value="Create User"/>                       
+                    </h:panelGrid>
+                  </h:form>     
+                  
+                   <h:link outcome="loginVisuLeMo" value="Back to Home" />
+              </div>   
+        </article>
+        <article class="span8">
+           <p:messages  autoUpdate="true" closable="true" />
+        </article> 
+              
+      </div>
+        </div>
+  </div>
+    </div>
+
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+

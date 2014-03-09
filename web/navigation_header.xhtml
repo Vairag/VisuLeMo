@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+   
+    <div class="container clearfix">
+    <div class="row">
+      <div class="span12">
+         <div class="navbar navbar_">
+             <div class="container">
+                 <h1 class="brand brand_"> <c:if test="#{active_menu eq 'Login'}"><a href="loginVisuLeMo.xhtml"><img alt="" src="resources/img/VisuLeMo-logo.png"/> </a></c:if>
+                                           <c:if test="#{active_menu ne 'Login'}"><a href="learner.xhtml"><img alt="" src="resources/img/VisuLeMo-logo.png"/> </a></c:if>
+                 </h1>
+               
+              </div>
+         </div>
+      </div>
+        </div>
+  </div>
+</ui:composition>

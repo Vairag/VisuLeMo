@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | My Interests"/>
+        </ui:include>
+	
+     </h:head>
+
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>
+    <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="My Interests"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+        
+        <article class="span12">
+             <h5>Welcome <h:outputText value="#{learner.learner_name}"/>, </h5>
+              <div class="inner-1">
+                  <h:form id="logoutform" style="float:right;font-size: 16px;">
+                      <a href="learner.xhtml">Home</a>
+                    | <h:commandLink value="My interests" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}"/>
+                    | <a href="settings.xhtml">Settings</a>  
+                    | <h:commandLink value="Logout" action="#{learner.logout()}"/><br/>
+              </h:form>
+                 <div style="height:40px;"></div>     
+        
+                 <br/><h5> My interests
+                     <h:form style="float:right;"> 
+                        
+                        <a style="font-size: 15px;" href="chooseFramework.xhtml" title="Fetch your interests from the different Learner Models">Fetch Interests</a>    
+                        | <a style="font-size: 15px;" href="visualizations.xhtml" title="View different visualizations for your interests">Visualizations</a>  
+                        
+                    </h:form>     
+                 </h5>
+        
+        <h:form id="myInterestformTable">
+         <table class="table table-hover table-bordered" style="background: white; color:black;">
+           
+             <thead>
+              <tr style="background: lightgray;">
+                <th>Id</th><!-- interest term -->
+                <th>Interest name</th>
+                <th title="Tells importance of the interest (value between 0 to 1). 1 means highly interested and vice versa.">Importance Value<sup>i</sup></th>
+                <th title="Action based on which a learner model came to know about your interest">Action<sup>i</sup></th>
+                <th title="References from where the interest came">Items<sup>i</sup></th>
+                <th>Source</th>
+                <th>Learner Model</th>
+                <th title="Categories under which interest comes (Extracted from Freebase)">Categories<sup>i</sup></th>
+              </tr>
+            </thead> 
+             
+                 <!--<h:inputHidden value="#{learner.learnerId}" id="learnerid" />-->
+             <tbody>
+            <c:forEach var="iTemp" items="${learnerinterests.myI}">
+            <tr>
+               
+                <td> ${iTemp.learner_interest_id}</td>
+                <td><p:inplace > <p:inputText id="interest${iTemp.learner_interest_id}" value="${iTemp.interest_name}"/></p:inplace></td>
+                <td><p:inplace > <p:inputText id="weight${iTemp.learner_interest_id}" value="${iTemp.weight}"/></p:inplace></td>
+                <td><p:inplace > <p:inputText id="action${iTemp.learner_interest_id}" value="${iTemp.action_name}"/></p:inplace></td>
+                <td><p:inplace > <p:inputText id="items${iTemp.learner_interest_id}" value="${iTemp.item_link}"/></p:inplace></td>
+                <td><c:if test="#{iTemp.source_name eq 'No source'}">No source</c:if><c:if test="#{iTemp.source_name ne 'No source'}"><a href="https://${iTemp.source_url}" target="_blank">${iTemp.source_name}</a></c:if></td>
+                <td><a href="${iTemp.framework_link}" target="_blank">${iTemp.framework_name}</a></td>
+                <td><h:commandLink target="_blank" value="View" action="#{learnerinterests.viewTypesDomainOfInterest(iTemp)}"/></td>
+            </tr>
+            </c:forEach> 
+             <tr>
+                 <td colspan="8"> <h:commandButton class="btn btn-1" style="background: lightseagreen;;" action="#{learnerinterests.updateLearnerInterests(learnerinterests.myI)}" value="Save Interests"/></td>
+              </tr>
+             </tbody>   
+             
+                 
+             
+        </table>
+         
+          </h:form>
+         
+              </div>   
+        </article>
+           
+      </div>
+        </div>
+  </div>
+    </div>
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+

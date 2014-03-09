@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | Interests"/>
+        </ui:include>
+	
+     </h:head>
+
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>
+    <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="Home"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+        
+        <article class="span12">
+            <h5>Welcome <h:outputText value="#{learner.learner_name}"/>, </h5>
+              <div class="inner-1">
+                 <h:form id="logoutform" style="float:right;font-size: 16px;">
+                      <a href="learner.xhtml">Home</a>
+                    | <h:commandLink value="My interests" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}"/>
+                    | <a href="settings.xhtml">Settings</a>  
+                    | <h:commandLink value="Logout" action="#{learner.logout()}"/><br/>
+              </h:form>
+                 <div style="height:40px;"></div>
+        
+        <br /><h5> Fetched interests are : </h5><br/>
+         <p:messages showDetail="true" autoUpdate="true" closable="true" />
+         <h:form id="editInterestform">
+         <table id="categoryTable" class="table table-hover table-bordered" style="background: black;">
+             <thead>
+                <tr style="background: lightgray;">
+                <th title="Name of interest in which you are interested.">Interest name<sup>i</sup></th><!-- interest term -->
+                <th>Learner Model</th>
+                <th title="Tells importance of the interest (value between 0 to 1). 1 means highly interested and vice versa.">Importance value<sup>i</sup></th><!-- yahoocategoryscore -->
+                <th title="Action based on which a learner model came to know about your interest">Action<sup>i</sup></th>
+                <th title="References from where the interest came">Items<sup>i</sup></th><!-- Not in PALM-->
+                <th>Source</th><!-- Not in PALM-->
+                <th title="Modification time of the interest">Timestamp<sup>i</sup></th><!-- Created interest-->
+            </tr>
+            </thead> 
+             <tbody>
+             <c:forEach var="category" items="${apijsonbean.ipage.categories}"> 
+            <tr>
+                <td><p:inplace > <p:inputText required="true" id="interest_${category.interest.id}" value="${category.interest.term}"/></p:inplace></td>
+                <h:inputHidden id="learner_${category.interest.id}" value="${category.author.name}" />
+                <td><h:outputText value="PALM"/></td>
+                <td><p:inplace > <p:inputText required="true" id="weight_${category.interest.id}" value="${category.interest.yahoocategoryscore}"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="action_${category.interest.id}" value="publication"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="items_${category.interest.id}" value="No items"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="source_${category.interest.id}" value="No source"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="timestamp_${category.interest.id}" value="${category.interest.modified}"/></p:inplace></td>
+            </tr>
+            </c:forEach>  
+            <c:forEach var="related" items="${apijsonbean.ipage.related}"> 
+            <tr>
+                <td><p:inplace > <p:inputText required="true" id="interest_${related.interest.id}" value="${related.interest.term}"/></p:inplace></td>
+                <h:inputHidden id="learner_${related.interest.id}" value="${related.author.name}" />
+                <td><h:outputText value="PALM"/></td>
+                <td><p:inplace > <p:inputText required="true" id="weight_${related.interest.id}" value="1.0"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="action_${related.interest.id}" value="publication"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="items_${related.interest.id}" value="${related.interest.yahoowiki}"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="source_${related.interest.id}" value="No source"/></p:inplace></td>
+                <td><p:inplace > <p:inputText required="true" id="timestamp_${related.interest.id}" value="${related.interest.modified}"/></p:inplace></td>
+            </tr>
+            </c:forEach>     
+            <c:forEach var="webtrace" items="${apijsonbean.wbIs}"> 
+                <tr>
+                   <td><p:inplace > <p:inputText required="true" id="interest_${webtrace.item_id}" value="${webtrace.wb_interest}"/></p:inplace></td>
+                   <h:inputHidden id="learner_${webtrace.item_id}" value="#{learner.learner_name}" />
+                   <td><h:outputText value="Webtrace"/></td>
+                   <td><p:inplace > <p:inputText required="true" id="weight_${webtrace.item_id}" value="${webtrace.wb_weight}"/></p:inplace></td>
+                   <td><p:inplace > <p:inputText required="true" id="action_${webtrace.item_id}" value="${webtrace.wb_action}"/></p:inplace></td>
+                   <td><p:inplace > <p:inputText required="true" id="items_${webtrace.item_id}" value="${webtrace.wb_item}"/></p:inplace></td>
+                   <td><p:inplace > <p:inputText required="true" id="source_${webtrace.item_id}" value="${webtrace.wb_source}"/></p:inplace></td>
+                   <td><p:inplace > <p:inputText required="true" id="timestamp_${webtrace.item_id}" value="${webtrace.wb_timestamp}"/></p:inplace></td>
+               </tr>
+
+            
+            </c:forEach>     
+                 
+                 
+             </tbody>   
+        </table>
+          
+          
+          <h:commandButton style="float:left;background: lightcoral;" class="btn btn-1" action="chooseFramework.xhtml" value="Back"/>
+        
+           <h:commandButton style="float:right;background: lightseagreen;" class="btn btn-1" action="#{apijsonbean.saveInterestsToDatabase(learner.learnerId)}" value="Save Interests and Visualize"/>
+          
+         </h:form>
+   
+              </div>   
+        </article>
+           
+      </div>
+        </div>
+  </div>
+    </div>
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+
+ 
+

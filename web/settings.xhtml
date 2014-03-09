@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | Settings"/>
+        </ui:include>
+	
+     </h:head>
+
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>
+    <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="Home"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+              
+              <h5>Welcome <h:outputText value="#{learner.learner_name}"/>, </h5>
+              <div class="inner-1">
+                  <h:form id="logoutform" style="float:right;font-size: 16px;">
+                      <a href="learner.xhtml">Home</a>
+                    | <h:commandLink value="My interests" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}"/>
+                    | <a href="settings.xhtml">Settings</a>  
+                    | <h:commandLink value="Logout" action="#{learner.logout()}"/><br/>
+              </h:form>
+                 <div style="height:40px;"></div>         
+              </div>    
+        
+         
+         
+         <h:form id="updatelearner">
+             <p:messages autoUpdate="true" closable="true" /> 
+        <article class="span4">
+         
+             
+              <div class="inner-1">          
+             <h5>Personal Details:</h5>       
+                 <table class="table " style="background: white; color:black;">
+            
+                    <tr>
+                        <th >Full Name*:</th>
+                        <td>#{learner.learner_name}</td>
+                    </tr>
+                    <tr>
+                        <th >University:</th>
+                        <td><p:inplace> <p:inputText  id='university' value="#{learner.learner_university}" /></p:inplace></td>
+                    </tr>
+                    <tr>
+                        <th >Designation:</th>
+                        <td><p:inplace> <p:inputText id='designation' value="#{learner.learner_designation}" /></p:inplace></td>
+                    </tr>
+                    
+                 </table>   
+             * fields can not be changed! <br/>
+             Click on the value to edit it.
+                 </div>   
+        </article>
+         <article class="span4">
+          
+              <div class="inner-1">          
+                 <h5>Login Details:</h5> 
+                 <table class="table " style="background: white; color:black;">
+            
+                    <tr>
+                        <th >Login Id*:</th>
+                        <td>#{learner.learner_uid}</td>
+                    </tr>
+                    <tr>
+                        <th >New Password:</th>
+                        <td><p:password id="newpwd"/></td>
+                    </tr>
+                    <tr>
+                        <th >Email:</th>
+                        <td><p:inplace> <p:inputText  id='email' value="#{learner.learner_email}" />  </p:inplace></td>
+                    </tr>
+                 </table>   
+                 
+                 <h:commandButton style="background: lightseagreen;" class="btn btn-1" action="#{learner.updateLearnerDetails()}" value="Update details"/> 
+
+              </div>   
+        </article> 
+         <article class="span4">
+              <div class="inner-1">             
+                  <h5>Different learner model IDs:</h5>
+                  <table class="table " style="background: white; color:black;">
+            
+                    <tr>
+                        <th title="Your Name in the learner model PALM">Name in PALM<sup>i</sup>:</th>
+                        <td><p:inplace> <p:inputText id='palm_name' value="#{learner.nameInPalm}" />  </p:inplace></td>
+                    </tr>
+                    <tr>
+                        <th title="Your Id in the learner model Webtrace">Webtrace Id<sup>i</sup>:</th>
+                        <td><p:inplace> <p:inputText  id='webtrace_name' value="#{learner.nameInWebtrace}" />  </p:inplace></td>
+                    </tr>
+                 </table>   
+                 
+              </div>   
+        </article> 
+         
+           </h:form>   
+      </div>
+        </div>
+          
+  </div>
+</div>
+      
+
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+

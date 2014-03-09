@@ -1,0 +1,63 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+	<title><h:outputText value="#{title}"/></title>
+	
+        <meta charset="utf-8" />
+        <link rel="icon" href="resources/img/VisuLeMo-icon.png" type="image/x-icon"/>
+        <meta name="description" content="VisuLeMo is Visualizations of learner models by Vairag Godhani"/>
+        <meta name="author" content="Vairag Godhani"/>  
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        
+	<link rel="stylesheet" href="resources/css/bootstrap.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="resources/css/responsive.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="resources/css/style.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="resources/css/touchTouch.css" type="text/css" media="screen"/>
+	<link rel="stylesheet" href="resources/css/kwicks-slider.css" type="text/css" media="screen"/>
+		
+        <script type="text/javascript" src="resources/js/jquery.js"></script>
+        <script type="text/javascript" src="resources/js/superfish.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.flexslider-min.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.kwicks-1.5.1.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.easing.1.3.js"></script>
+	<script type="text/javascript" src="resources/js/jquery.cookie.js"></script>    
+	<script type="text/javascript" src="resources/js/touchTouch.jquery.js"></script>
+        <script type="text/javascript" src="resources/js/jquery.tablesorter.min.js"></script>
+	<script type="text/javascript">if($(window).width()>1024){document.write("&lt;"+"script src='resources/js/jquery.preloader.js'>&lt;/"+"script>");}</script>
+        <!-- the actual one was <script type="text/javascript">if($(window).width()>1024){document.write("<"+"script src='resources/js/jquery.preloader.js'></"+"script>");}	</script>  -->
+	<script>		
+		 jQuery(window).load(function() {	
+                    $x = $(window).width();		
+                       if($x > 1024)
+                       {			
+                       jQuery("#content .row").preloader();    }	
+
+                       jQuery(".list-blog li:last-child").addClass("last"); 
+                       jQuery(".list li:last-child").addClass("last"); 
+
+                       jQuery('.magnifier').touchTouch();			
+                               jQuery('.spinner').animate({'opacity':0},1000,'easeOutCubic',function (){jQuery(this).css('display','none')});	
+                        $("#categoryTable, #relatedTable, #authorTable").tablesorter(); 
+                  }); 
+				
+	</script>
+
+        <!--[if lt IE 8]>
+                        <div style='text-align:center'><a href="http://www.microsoft.com/windows/internet-explorer/default.aspx?ocid=ie6_countdown_bannercode"><img src="http://www.theie6countdown.com/img/upgrade.jpg"border="0"alt=""/></a></div>  
+                <![endif]-->
+        <!--[if (gt IE 9)|!(IE)]><!-->
+        <!--<![endif]-->
+        <!--[if lt IE 9]>
+            <script src="resources/js/html5.js"></script>
+            <link rel="stylesheet" href="resources/css/docs.css" type="text/css" media="screen">
+            <link rel="stylesheet" href="resources/css/ie.css" type="text/css" media="screen">
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
+            <link href='http://fonts.googleapis.com/css?family=Open+Sans:400' rel='stylesheet' type='text/css'>
+
+          <![endif]-->       
+</ui:composition>
+
+
+
+  
+	

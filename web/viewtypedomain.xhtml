@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | Type Domain"/>
+        </ui:include>
+	
+     </h:head>
+
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>
+    <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="My Interests"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+        
+        <article class="span12">
+             <p:messages showDetail="true" autoUpdate="true" closable="true" />  
+            <h5>Welcome <h:outputText value="#{learner.learner_name}"/>, </h5>
+              <div class="inner-1">
+                  <h:form id="logoutform" style="float:right;font-size: 16px;">
+                      <a href="learner.xhtml">Home</a>
+                    | <h:commandLink value="My interests" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}"/>
+                    | <a href="settings.xhtml">Settings</a>  
+                    | <h:commandLink value="Logout" action="#{learner.logout()}"/><br/>
+              </h:form>
+               
+                  <div style="height:40px;"></div>      
+         <h5>Interest: 
+              
+         </h5>      
+        <table class="table table-hover table-bordered" style="background: white; color:black;">
+             <thead>
+              <tr style="background: lightgray;">
+                <th>Id</th>
+                <th title="Name of interest in which you are interested.">Interest name<sup>i</sup></th>
+                <th title="Tells importance of the interest (value between 0 to 1). 1 means highly interested and vice versa.">Importance value<sup>i</sup></th>
+                <th title="Action based on which a learner model came to know about your interest">Action<sup>i</sup></th>
+                <th>Source</th>
+                <th>Learner model</th>
+              </tr>
+            </thead> 
+             <tbody>
+            <tr>
+                <td> ${learnerinterests.currentInterest.learner_interest_id}</td>
+                <td> ${learnerinterests.currentInterest.interest_name}</td>
+                <td> ${learnerinterests.currentInterest.weight}</td>
+                <td> ${learnerinterests.currentInterest.action_name}</td>
+                <td><c:if test="#{learnerinterests.currentInterest.source_name eq 'No source'}">No source</c:if><c:if test="#{learnerinterests.currentInterest.source_name ne 'No source'}"><a href="https://${learnerinterests.currentInterest.source_url}" target="_blank">${learnerinterests.currentInterest.source_name}</a></c:if></td>
+                <td><a href="${learnerinterests.currentInterest.framework_link}" target="_blank">${learnerinterests.currentInterest.framework_name}</a></td>    
+            </tr> 
+             </tbody>   
+        </table>
+        <h5>Categories under which above interest comes: </h5>
+         <table id="typeDomainTable" class="table table-hover table-bordered" style="background: white; color:black;">
+             <thead>
+              <tr style="background: lightgray;">
+                <th>Parent category</th>
+                <th>Category</th>
+              </tr>
+            </thead> 
+             <h:form id="typeDomainform">
+             <tbody>
+                 <c:forEach var="type" items="${learnerinterests.types}" varStatus="status">
+            <tr>
+                <td>${learnerinterests.domains[status.index]}</td>
+                 <td> ${type}</td>
+            </tr>
+            </c:forEach>                
+             </tbody>   
+                 
+             </h:form>
+        </table>
+            <h:form> 
+                 <h:commandButton style="background: lightcoral;" class="btn btn-1" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}" value="Back"/> <br/>
+             </h:form>
+              </div>   
+        </article>
+           
+      </div>
+        </div>
+  </div>
+    </div>
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+

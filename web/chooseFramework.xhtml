@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this template, choose Tools | Templates
+and open the template in the editor.
+-->
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | Framework"/>
+        </ui:include>
+     </h:head>
+
+<body>
+    
+<!--<body  onload='var temp = { "id": "01", "name": "Kumar", "children": [] }; init(temp);'> -->
+<div class="spinner"></div>
+<!-- header -->
+<header>
+    <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="Home"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+      <!-- content -->
+      <div id="content"><div class="ic"></div>
+    <div class="container">
+          <div class="row">
+        
+        <article class="span12">
+            <p:messages showDetail="true" autoUpdate="true" closable="true" />  
+            <h5>Welcome <h:outputText value="#{learner.learner_name}"/>,</h5>
+              <div class="inner-1">
+                  <h:form id="logoutform" style="float:right;font-size: 16px;">
+                      <a href="learner.xhtml">Home</a>
+                    | <h:commandLink value="My interests" action="#{learnerinterests.getLearnerInterests(learner.learnerId, 'no')}"/>
+                    | <a href="settings.xhtml">Settings</a>  
+                    | <h:commandLink value="Logout" action="#{learner.logout()}"/><br/>
+              </h:form>
+                 <div style="height:40px;"></div>
+              
+             <h:form id="selectfrmwrk">
+                    <h:outputText style="color:white;" value="Select Learner Model to fetch interests: "/>  <br/><br/>
+                    <p:selectManyCheckbox style="margin-left: 30px;" layout="pageDirection" value="#{apijsonbean.selectedFrameworks}" required="true">  
+                        <f:selectItem itemLabel=" PALM (returns academic interests)" itemValue="PALM" />  
+                        <f:selectItem itemLabel=" Webtrace (returns social interests)" itemValue="webtrace" />  
+                    </p:selectManyCheckbox>  
+                    <br/>
+                    <h:commandButton  style="background: lightseagreen;" class="btn btn-1" value="Fetch" action="#{apijsonbean.frameworkSelection(learner.nameInPalm, learner.nameInWebtrace)}"/>
+                  
+              </h:form>                                          
+                  
+
+                  
+             
+                  
+              </div>   
+        </article>
+           
+      </div>
+        </div>
+  </div>
+    </div>
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+
+

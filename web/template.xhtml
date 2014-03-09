@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+
+<!-- This is a sample template file, which is used as initial start for the new XHTML page-->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+     <h:head>
+        <ui:include src="head.xhtml" > 
+            <ui:param name="title" value="VisuLeMo | Login"/>
+        </ui:include>
+     </h:head>
+<body>
+<div class="spinner"></div>
+<!-- header -->
+<header>   
+     <ui:include src="navigation_header.xhtml" >  
+            <ui:param name="active_menu" value="Login"/>
+    </ui:include> 
+</header>
+<div class="bg-content"> 
+    <div class="container">
+       <div class="row">
+        
+           Content specific to this page!
+              
+      </div>
+     </div>
+  </div>   
+<!-- footer -->
+<footer>
+      <ui:include src="footer.xhtml"/>
+</footer>
+<script type="text/javascript" src="resources/js/bootstrap.js"></script>
+</body>
+</html>
+
